@@ -1,0 +1,143 @@
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<style>
+	body {
+		font-family: Roboto;
+		background: #ffb347;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #ffcc33, #ffb347);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #ffcc33, #ffb347); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+	}
+
+	#container {
+		width: 360px;
+		margin: 100px auto;
+		background: #f7f7f7;
+		box-shadow: 0 0 3px rgba(0,0,0, 0.1);
+	}
+
+	h1 {
+		background: darkorange;
+		color: white;
+		margin: 0;
+		padding: 10px 20px;
+		text-transform: uppercase;
+		font-size: 24px;
+		font-weight: normal;
+	}
+
+	.fa-plus {
+		float: right;
+	}
+
+	input {
+		font-size: 18px;
+		color: #2980b9;
+		background-color: #f7f7f7;
+		width: 100%;
+		padding: 13px 13px 13px 20px;
+		box-sizing: border-box;
+		border: 3px solid rgba(0,0,0,0);
+	}
+
+	input:focus {
+		background: #fff;
+		border: 3px solid #2980b9;
+		outline: none;
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		background: #fff;
+		height: 40px;
+		line-height: 40px;
+		color: #666;
+	}
+
+	li:nth-child(2n){
+		background: #f7f7f7;
+	}
+
+	li span {
+		background: #e74c3c;
+		height: 40px;
+		margin-right: 20px;
+		text-align: center;
+		color: white;
+		width: 0;
+		display: inline-block;
+		transition: 0.2s linear;
+		opacity: 0;
+	}
+
+	li:hover span {
+		width: 40px;
+		opacity: 1.0;
+	}
+
+	.completed {
+		color: gray;
+		text-decoration: line-through;
+	}
+</style>
+
+<div id="container">
+	<h1>할 일<span id="toggle-form"><i class="fa fa-plus"></i></span></h1>
+	<input type="text" placeholder="할 일을 입력해주세요">
+
+	<ul>
+		<li><span><i class="fa fa-trash"></i></span> jQuery 교안 짜기</li>
+		<li><span><i class="fa fa-trash"></i></span> React 인강 마무리하기</li>
+		<li><span><i class="fa fa-trash"></i></span> 컴퓨터프로그래밍 과제</li>
+	</ul>
+</div>
+
+<script>
+
+	// li를 click하면 completed 라는 class를 toggle 한다.
+	// $("ul").on("click", "span", function(event){
+	// 	$(this).parent().fadeOut(500,function(){
+	// 		$(this).remove();
+	// 	});
+	// 	event.stopPropagation();
+	// })
+
+	$("span").click(function(event){
+		$(this).parent().fadeOut(500,function(){
+			$(this).remove();
+		});
+		event.stopPropagation();
+	})
+
+	// trash icon를 click하면 해당 li를 500ms간 fadeout 후 remove한다.
+    $("input").keypress(function(event) {
+	
+    if (event.which === 13 ) {
+			var input = $(this).val();
+			$("input").val("")
+			$("ul").append("<li><span><i class='fa fa-trash'></i></span>"+ input + "</li>")
+			}
+	
+	
+	})
+	// $("#toggle_form").click(function() { 
+	// $("input[type='text']").fadeToggle();
+	// });
+	$("#toggle_form").on("click","input[type='text']", function() {
+ $(this).fadetoggle()});
+ $("input").on("click", function() {
+        $.getJSON("https://dog.ceo/api/breeds/image/random", function(data) {
+            $("img").attr("src", data["message"])
+        })
+    })
+	// input에서 enter를 누르면 그 value를 기존 li과 유사한 형식으로 ul에 append하고, input의 value값은 빈 칸으로 만든다.
+	// plus icon을 click하면 input의 fade 상태를 toggle한다.
+</script>
+
+<img>
